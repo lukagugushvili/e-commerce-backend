@@ -1,13 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { UserRoles } from '../../enum/user-roles.enum';
 
 @Schema({ timestamps: true })
 export class User extends Document {
   @Prop({ required: true })
   userName: string;
 
-  @Prop()
-  role: string;
+  @Prop({ enum: UserRoles, default: UserRoles.USER })
+  role: UserRoles;
 
   @Prop({ required: true, unique: true })
   email: string;
