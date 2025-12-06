@@ -11,6 +11,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRoles } from '../enum/user-roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -30,6 +31,7 @@ export class UsersService {
 
     return this.userModel.create({
       ...dto,
+      role: UserRoles.USER,
       password: hashedPassword,
     });
   }
